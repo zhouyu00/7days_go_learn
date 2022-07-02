@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// HandlerFunc defines the request handler used by gee
+// HandlerFunc defines the request handler used by geek-web
 type HandlerFunc func(ctx *Context)
 
 type RouterGroup struct {
@@ -43,6 +43,13 @@ func New() *Engine {
 	return engine
 }
 
+// Default use Logger() & Recovery middlewares
+func Default() *Engine {
+	engine := New()
+	engine.Use(Recovery(), Logger())
+	return engine
+}
+
 func (group *RouterGroup) Group(prefix string) *RouterGroup {
 	engine := group.engine
 	newGroup := &RouterGroup{
@@ -65,7 +72,11 @@ func (group *RouterGroup) GET(pattern string, handler HandlerFunc) {
 	group.addRoute("GET", pattern, handler)
 }
 
-// POST defines the method to add POST request
+// POST defines the method to add PO
+//
+//
+//
+//254708ST request
 func (group *RouterGroup) POST(pattern string, handler HandlerFunc) {
 	group.addRoute("POST", pattern, handler)
 }
